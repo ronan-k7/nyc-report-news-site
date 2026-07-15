@@ -1,0 +1,121 @@
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /
+
+# --------------------------------------------------
+# FORCE HTTPS + WWW
+# --------------------------------------------------
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^nycreport\.org$ [NC]
+RewriteRule ^(.*)$ https://www.nycreport.org/$1 [R=301,L]
+
+# --------------------------------------------------
+# NEXT.JS STATIC EXPORT ROUTING (trailingSlash: true)
+# Next.js builds: /category/slug/index.html
+# --------------------------------------------------
+
+# 1. Serve real files directly (JS, CSS, images, fonts)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# 2. Add trailing slash to directories (prevents 404)
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/])$ /$1/ [R=301,L]
+
+# 3. For ANY depth URL: try path/index.html (works for /cat/slug AND /cat/sub/slug)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*)$ %{REQUEST_URI}/index.html [L]
+
+# 4. Fallback to root index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L]
+
+# --------------------------------------------------
+# GZIP COMPRESSION
+# --------------------------------------------------
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --------------------------------------------------
+# BROWSER CACHING
+# --------------------------------------------------
+<IfModule mod_expires.c>
+ExpiresActive On
+# HTML - NEVER cache so users always get the latest version
+ExpiresByType text/html "access plus 0 seconds"
+# CSS & JS - safe to cache because Next.js uses content hashes in filenames
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+# Images
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+# Fonts
+ExpiresByType font/woff "access plus 1 year"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType application/font-woff "access plus 1 year"
+ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+# --------------------------------------------------
+# CACHE CONTROL HEADERS
+# --------------------------------------------------
+<IfModule mod_headers.c>
+# Static assets - cache 1 year (Next.js hashes every filename so cache is safe)
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|webp|svg|woff|woff2)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+# HTML - NEVER cache (critical: prevents broken navigation after rebuild)
+<FilesMatch "\.(html|htm)$">
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires 0
+</FilesMatch>
+</IfModule>
+
+# --------------------------------------------------
+# SECURITY HEADERS
+# --------------------------------------------------
+<IfModule mod_headers.c>
+Header always set X-Frame-Options SAMEORIGIN
+Header always set X-XSS-Protection "1; mode=block"
+Header always set X-Content-Type-Options nosniff
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# --------------------------------------------------
+# BLOCK DIRECTORY BROWSING
+# --------------------------------------------------
+Options -Indexes
+
+# --------------------------------------------------
+# PROTECT IMPORTANT FILES
+# --------------------------------------------------
+<FilesMatch "\.(htaccess|htpasswd|env|git)">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# --------------------------------------------------
+# CUSTOM 404 PAGE
+# --------------------------------------------------
+ErrorDocument 404 /404/index.html
+ErrorDocument 500 /404/index.html

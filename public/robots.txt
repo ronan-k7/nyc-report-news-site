@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.nycreport.org
+
+# Sitemaps
+Sitemap: https://www.nycreport.org/sitemap.xml
