@@ -185,7 +185,7 @@ export default function Home() {
             category={sportsData[0].category}
             slug={sportsData[0].slug}
             author={sportsData[0].author}
-          />
+          /> 
           <NewsBus
             title={technologyData[0].title}
             shortdescription={technologyData[0].shortdescription ?? ''}
