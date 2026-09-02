@@ -1318,7 +1318,7 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
     const entries: { id: string; label: string }[] = [];
     (article.sections ?? []).forEach((s) => entries.push({ id: s.id, label: s.heading }));
     if (article.sources?.length) entries.push({ id: "ma-citations", label: "Citations" });
-    if (article.relatedLinks?.length) entries.push({ id: "ma-continue-reading", label: "Continue reading" });
+    // if (article.relatedLinks?.length) entries.push({ id: "ma-continue-reading", label: "Continue reading" });
     return entries;
   }, [article.sections, article.sources, article.relatedLinks]);
 
