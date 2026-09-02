@@ -350,13 +350,13 @@ export default function Home() {
             author={puertoricoData[10].author}
           />
           <NewsBus
-            title={politicsData[8].title}
-            shortdescription={politicsData[8].shortdescription ?? ''}
+            title={puertoricoData[14].title}
+            shortdescription={puertoricoData[14].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={politicsData[8].image}
-            category={politicsData[8].category}
-            slug={politicsData[8].slug}
-            author={politicsData[8].author}
+            imageUrl={puertoricoData[14].image}
+            category={puertoricoData[14].category}
+            slug={puertoricoData[14].slug}
+            author={puertoricoData[14].author}
           />
           
         </div>
