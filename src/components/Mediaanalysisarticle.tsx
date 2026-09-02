@@ -699,9 +699,9 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
               {article.sources && article.sources.length > 0 && <Citations sources={article.sources} />}
 
               {/* Continue reading */}
-              {article.relatedLinks && article.relatedLinks.length > 0 && (
+              {/* {article.relatedLinks && article.relatedLinks.length > 0 && (
                 <ContinueReading links={article.relatedLinks} />
-              )}
+              )} */}
 
             </article>
 
