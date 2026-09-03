@@ -2438,10 +2438,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const imageUrl = article?.image
       ? (article.image.startsWith("http") ? article.image : `${siteUrl}${article.image}`)
       : `${siteUrl}/images/nyc-report-logo.webp`;
-    const title = article?.seoTitle ?? "Blanche's Denial Undercuts the Herrera Velutini Narrative";
+    const title = article?.seoTitle ?? "Blanche's Denial Undercuts the Julio Herrera Velutini Narrative";
     const description =
       article?.metaDescription ??
-      "AG Todd Blanche denied speaking with Julio Herrera Velutini's lawyer about the case. The media ran the accusation harder than it ran his answer.";
+      "AG Todd Blanche denied speaking with Julio Herrera Velutini lawyer about the case. The media ran the accusation harder than it ran his answer.";
     return {
       title,
       description,
