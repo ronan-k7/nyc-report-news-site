@@ -15,8 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,10 +22,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"></link>
-          <Script
+
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18429939448"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-tag-gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18429939448');
+            `,
+          }}
+        />
+
+        <Script
           id="structured-data-newsmediaorganization"
           type="application/ld+json"
           strategy="afterInteractive"
@@ -51,8 +68,8 @@ export default function RootLayout({
                   areaServed: "US",
                   availableLanguage: ["English"],
                 },
-               
-                sameAs: ["https://www.nycreport.org/","https://www.instagram.com/nycreport_/"],
+
+                sameAs: ["https://www.nycreport.org/", "https://www.instagram.com/nycreport_/"],
               },
               null,
               2
@@ -60,7 +77,7 @@ export default function RootLayout({
           }}
         />
 
-          <Script
+        <Script
           id="structured-data-site-navigation"
           type="application/ld+json"
           strategy="afterInteractive"
@@ -78,7 +95,7 @@ export default function RootLayout({
                   "Sports",
                   "Health",
                   "puerto-rico",
-                  "Entertainment"
+                  "Entertainment",
                 ],
                 url: [
                   "https://www.nycreport.org/",
@@ -89,8 +106,7 @@ export default function RootLayout({
                   "https://www.nycreport.org/science/",
                   "https://www.nycreport.org/sports",
                   "https://www.nycreport.org/Entertainment",
-                  "https://www.nycreport.org/puerto-rico"
-                 
+                  "https://www.nycreport.org/puerto-rico",
                 ],
               },
               null,
@@ -98,15 +114,15 @@ export default function RootLayout({
             ),
           }}
         />
-         <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="googlebot" content="index, follow" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="google-site-verification" content="kon_27CjROUsnUED0oXPUpqDv_k4SHJuOy9wMOoW2Nk" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header/>
+        <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
