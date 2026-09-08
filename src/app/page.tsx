@@ -580,12 +580,12 @@ export default function Home() {
  <NewsSection 
   sectionTitle="Science"
   mainArticle={{
-    image: scienceData[15].image,
-    imageAlt: scienceData[15].slug,
-    category: scienceData[15].category,
-    title: scienceData[15].title,
-    slug:scienceData[15].slug,
-    author:scienceData[15].author
+    image: scienceData[0].image,
+    imageAlt: scienceData[0].slug,
+    category: scienceData[0].category,
+    title: scienceData[0].title,
+    slug:scienceData[0].slug,
+    author:scienceData[0].author
   
   }}
   
