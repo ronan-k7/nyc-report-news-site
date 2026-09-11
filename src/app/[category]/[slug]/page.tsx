@@ -2339,6 +2339,15 @@ function renderMediaAnalysis(article: Article, category: string, slug: string) {
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     articleSection: capitalize(category),
+    keywords: [
+      "Todd Blanche",
+      "Julio Herrera Velutini",
+      "Bancrédito",
+      "Wanda Vázquez Garced",
+      "Christopher Kise",
+      "Puerto Rico",
+      "Justice Department",
+    ],
   };
 
   return (
