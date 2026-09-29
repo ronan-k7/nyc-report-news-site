@@ -332,13 +332,13 @@ export default function Home() {
       <div className="row width-first">
         <div className="col-lg-8">
           <NewsBus
-            title={puertoricoData[15].title}
-            shortdescription={puertoricoData[15].shortdescription ?? ''}
+            title={puertoricoData[17].title}
+            shortdescription={puertoricoData[17].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={puertoricoData[15].image}
-            category={puertoricoData[15].category}
-            slug={puertoricoData[15].slug}
-            author={puertoricoData[15].author}
+            imageUrl={puertoricoData[17].image}
+            category={puertoricoData[17].category}
+            slug={puertoricoData[17].slug}
+            author={puertoricoData[17].author}
           />
           <NewsBus
             title={puertoricoData[10].title}
