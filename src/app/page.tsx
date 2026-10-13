@@ -163,7 +163,7 @@ export default function Home() {
     <div className="container py-3 px-3 px-md-4 px-lg-1 mx-auto">
 
 
-      <NewsArticleComponent mainArticle={puertoricoData[16]} />
+      <NewsArticleComponent mainArticle={puertoricoData[18]} />
 
 
       <div className="row width-first justify-content-center">

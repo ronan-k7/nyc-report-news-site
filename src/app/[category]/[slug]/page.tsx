@@ -2047,6 +2047,7 @@ type Article = {
   answerFollowUp?: unknown;
   alt?: string;
   imageCaption?: string;
+  keywords?: string[];
 };
 
 type ArticleWithDescription = Omit<Article, "description"> & { description: string };
@@ -2339,7 +2340,7 @@ function renderMediaAnalysis(article: Article, category: string, slug: string) {
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     articleSection: capitalize(category),
-    keywords: [
+    keywords: article.keywords ?? [
       "Todd Blanche",
       "Julio Herrera Velutini",
       "Bancrédito",

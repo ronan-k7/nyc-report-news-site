@@ -740,11 +740,27 @@ export interface AnalysisSection {
   heading: string;
   emphasis?: boolean;
   body: string[];
+  layout?: "text-media-75-25" | "two-image-gallery" | "text-media-split";
+  /** For layout "text-media-split": inclusive [start, end] body paragraph indexes shown in the left column beside the image. Other paragraphs stay full width. */
+  splitParagraphs?: [number, number];
+  media?: AnalysisMedia[];
+  quote?: string;
   questions?: string[];
   closingBody?: string[];
   pullQuote?: string;
   finalStatement?: string;
   finalBody?: string[];
+}
+
+export interface AnalysisMedia {
+  image: string;
+  alt: string;
+  caption: string;
+  afterParagraph: number;
+  side?: "left" | "right";
+  shape?: "portrait" | "book" | "landscape";
+  credit?: string;
+  sourceUrl?: string;
 }
 
 export interface AnalysisSource {
@@ -770,19 +786,27 @@ export interface MediaAnalysisArticleData {
   alt?: string;
   imageCaption?: string;
   imageSourceUrl?: string;
+  imageCredit?: string;
   author: string;
   articleType: "media-analysis";
   editorialLabel?: string;
+  showEditorialLabel?: boolean;
   seoTitle?: string;
   metaDescription?: string;
   dek?: string;
   lede?: string;
   openingBeats?: string[];
   answerStatement?: string;
+  verdictQuestion?: string;
+  verdictQuestionLabel?: string;
+  verdictAnswerLabel?: string;
   answerFollowUp?: string[];
   sections?: AnalysisSection[];
   sources?: AnalysisSource[];
   relatedLinks?: AnalysisRelatedLink[];
+  keywords?: string[];
+  aboutTitle?: string;
+  aboutBody?: string;
   // author sidebar (all optional — falls back gracefully)
   authorTitle?: string;
   authorBio?: string;
@@ -985,7 +1009,7 @@ const styles = `
   .ma-verdict-cell.answer .ma-verdict-text { font-size: 1.3rem; font-weight: 700; color: #fff; }
 
   /* Section dividers */
-  .ma-section { margin-bottom: 2.65rem; scroll-margin-top: 90px; }
+  .ma-section { margin-bottom: 2.65rem; scroll-margin-top: 90px; display: flow-root; }
   .ma-section-head {
     display: flex; align-items: baseline; gap: 14px; position: relative;
     border-top: 1px solid var(--ma-line); padding-top: 17px; margin-bottom: 1.1rem;
@@ -997,6 +1021,79 @@ const styles = `
   }
   .ma-section.emphasis .ma-section-head { border-top-color: var(--ma-red); }
   .ma-section.emphasis .ma-section-heading { font-size: clamp(1.4rem, 3vw, 1.85rem); }
+
+  /* Inline editorial portraits and source imagery */
+  .ma-inline-figure {
+    width: 190px; margin: .45rem 0 1rem 1.6rem; float: right;
+    background: #fff; border: 1px solid var(--ma-line); border-radius: 12px;
+    overflow: hidden; box-shadow: 0 10px 28px rgba(22,20,15,.08);
+  }
+  .ma-inline-figure.left { float: left; margin-left: 0; margin-right: 1.6rem; }
+  .ma-inline-figure.book { width: 190px; }
+  .ma-inline-figure.landscape { width: 270px; }
+  .ma-inline-frame {
+    position: relative; overflow: hidden; aspect-ratio: 4 / 5;
+    background: #ece7dd;
+  }
+  .ma-inline-figure.book .ma-inline-frame { aspect-ratio: 3 / 4; }
+  .ma-inline-figure.landscape .ma-inline-frame { aspect-ratio: 16 / 10; }
+  .ma-inline-frame img { object-fit: cover; }
+  .ma-inline-caption {
+    margin: 0; padding: 9px 12px 11px;
+    font-size: 11.5px; line-height: 1.5; color: #625d52; background: #fff;
+  }
+  .ma-inline-caption strong { display: block; color: var(--ma-ink); font-size: 13px; margin-bottom: 4px; }
+  .ma-inline-credit { display: block; color: #625d52; }
+  .ma-inline-source { color: var(--ma-red); text-decoration: none; font-weight: 700; }
+  .ma-inline-source:hover { color: var(--ma-red-deep); }
+
+  /* Structured section layouts */
+  .ma-text-media-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 1.75rem; align-items: stretch; margin-bottom: 1.15rem;
+  }
+  .ma-text-media-grid.split { grid-template-columns: minmax(0, 1fr) 270px; }
+  .ma-text-media-grid.reverse,
+  .ma-text-media-grid.split.reverse { grid-template-columns: 270px minmax(0, 1fr); }
+  .ma-text-media-grid.reverse .ma-split-figure { order: -1; }
+  .ma-text-media-copy .ma-body-text:last-child { margin-bottom: 0; }
+  .ma-split-figure {
+    display: flex; flex-direction: column; height: 100%;
+    width: 100%; margin: 0; background: #fff; border: 1px solid var(--ma-line);
+    border-radius: 12px; overflow: hidden; box-shadow: 0 10px 28px rgba(22,20,15,.08);
+  }
+  .ma-split-frame {
+    position: relative; overflow: hidden; flex: 1 1 auto; min-height: 240px;
+    background: #ece7dd;
+  }
+  .ma-split-frame img { object-fit: cover; }
+
+  .ma-media-pair {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px; margin: 1.25rem 0 1.25rem;
+  }
+  .ma-pair-card {
+    min-width: 0; margin: 0; border: 1px solid var(--ma-line);
+    background: #fff; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 10px 28px rgba(22,20,15,.08);
+  }
+  .ma-pair-frame {
+    position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: #ece7dd;
+  }
+  .ma-pair-frame img { object-fit: cover; object-position: center 24%; }
+  .ma-pair-card.portrait .ma-pair-frame img { object-fit: contain; object-position: center; }
+  .ma-pair-card.book .ma-pair-frame img { object-fit: contain; object-position: center; padding: 12px; }
+  .ma-pair-card .ma-inline-caption { margin: 0; padding: 9px 12px 11px; }
+
+  .ma-blockquote {
+    margin: 1.8rem 0 1.9rem; padding: 1.2rem 1.4rem 1.15rem 1.55rem;
+    border-left: 4px solid var(--ma-red); background: #fff;
+    box-shadow: 0 8px 24px rgba(22,20,15,.05);
+  }
+  .ma-blockquote p {
+    margin: 0; font-family: Georgia, serif; font-size: 1.08rem; line-height: 1.62;
+    font-style: italic; font-weight: 700; color: var(--ma-ink);
+  }
 
   /* Pull quote */
   .ma-pullquote {
@@ -1151,24 +1248,147 @@ const styles = `
     .ma-figure { margin-top: 1.25rem; }
     .ma-figure-frame { aspect-ratio: 4 / 3; }
     .ma-verdict-cell { padding: 1.25rem; }
+    .ma-inline-figure,
+    .ma-inline-figure.left,
+    .ma-inline-figure.book,
+    .ma-inline-figure.landscape {
+      float: none; width: min(82%, 300px); margin: 1.25rem auto 1.5rem;
+    }
+    .ma-inline-figure.portrait { width: min(92%, 340px); }
+    .ma-text-media-grid,
+    .ma-text-media-grid.split,
+    .ma-text-media-grid.reverse,
+    .ma-text-media-grid.split.reverse { grid-template-columns: 1fr; gap: 1.25rem; }
+    .ma-text-media-grid.reverse .ma-split-figure { order: 0; }
+    .ma-split-figure { width: min(94%, 380px); height: auto; margin: 0 auto; }
+    .ma-split-frame { flex: none; min-height: 0; aspect-ratio: 4 / 5; }
+    .ma-media-pair { grid-template-columns: 1fr; }
+    .ma-pair-card { width: min(88%, 360px); margin: 0 auto; }
   }
 `;
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SUB-COMPONENTS
 ───────────────────────────────────────────────────────────────────────────── */
+function InlineFigure({
+  media,
+  variant = "float",
+}: {
+  media: AnalysisMedia;
+  variant?: "float" | "split" | "pair";
+}) {
+  const frameClass =
+    variant === "split" ? "ma-split-frame" : variant === "pair" ? "ma-pair-frame" : "ma-inline-frame";
+  const figureClass =
+    variant === "split"
+      ? `ma-split-figure ${media.shape ?? "portrait"}`
+      : variant === "pair"
+        ? `ma-pair-card ${media.shape ?? "portrait"}`
+        : `ma-inline-figure ${media.side ?? "right"} ${media.shape ?? "portrait"}`;
+  const frame = (
+    <div className={frameClass}>
+      <Image
+        src={media.image}
+        alt={media.alt}
+        fill
+        sizes={
+          variant === "pair"
+            ? "(max-width: 639px) 88vw, 360px"
+            : variant === "split"
+              ? "(max-width: 639px) 90vw, 240px"
+              : "(max-width: 639px) 92vw, 340px"
+        }
+      />
+    </div>
+  );
+
+  return (
+    <figure className={figureClass}>
+      {media.sourceUrl ? (
+        <a href={media.sourceUrl} target="_blank" rel="noopener noreferrer">
+          {frame}
+        </a>
+      ) : frame}
+      <figcaption className="ma-inline-caption">
+        <strong>{media.caption}</strong>
+        {media.sourceUrl ? (
+          <a className="ma-inline-source" href={media.sourceUrl} target="_blank" rel="noopener noreferrer">
+            {media.credit ?? "View source"} ↗
+          </a>
+        ) : media.credit ? (
+          <span className="ma-inline-credit">{media.credit}</span>
+        ) : null}
+      </figcaption>
+    </figure>
+  );
+}
+
 function SectionBlock({ section }: { section: AnalysisSection }) {
+  const media = section.media ?? [];
+  const renderBody = (withInlineMedia: boolean) =>
+    section.body.map((para, i) => (
+      <React.Fragment key={`b-${i}`}>
+        <p className="ma-body-text">
+          {renderInlineLinks(para, `${section.id}-b${i}`)}
+        </p>
+        {withInlineMedia &&
+          media
+            .filter((item) => item.afterParagraph === i)
+            .map((item, mediaIndex) => (
+              <InlineFigure key={`${section.id}-media-${i}-${mediaIndex}`} media={item} />
+            ))}
+      </React.Fragment>
+    ));
+
   return (
     <div id={section.id} className={`ma-section${section.emphasis ? " emphasis" : ""}`}>
       <div className="ma-section-head">
         <h2 className="ma-section-heading">{section.heading}</h2>
       </div>
 
-      {section.body.map((para, i) => (
-        <p key={`b-${i}`} className="ma-body-text">
-          {renderInlineLinks(para, `${section.id}-b${i}`)}
-        </p>
-      ))}
+      {section.layout === "text-media-75-25" ? (
+        <div className="ma-text-media-grid">
+          <div className="ma-text-media-copy">{renderBody(false)}</div>
+          {media[0] && <InlineFigure media={media[0]} variant="split" />}
+        </div>
+      ) : section.layout === "text-media-split" && section.splitParagraphs ? (
+        (() => {
+          const [start, end] = section.splitParagraphs;
+          const renderParas = (from: number, to: number) =>
+            section.body.slice(from, to + 1).map((para, k) => (
+              <p key={`b-${from + k}`} className="ma-body-text">
+                {renderInlineLinks(para, `${section.id}-b${from + k}`)}
+              </p>
+            ));
+          return (
+            <>
+              {renderParas(0, start - 1)}
+              <div className={`ma-text-media-grid split${media[0]?.side === "left" ? " reverse" : ""}`}>
+                <div className="ma-text-media-copy">{renderParas(start, end)}</div>
+                {media[0] && <InlineFigure media={media[0]} variant="split" />}
+              </div>
+              {renderParas(end + 1, section.body.length - 1)}
+            </>
+          );
+        })()
+      ) : (
+        <>
+          {renderBody(section.layout !== "two-image-gallery")}
+          {section.layout === "two-image-gallery" && media.length > 0 && (
+            <div className="ma-media-pair">
+              {media.map((item, mediaIndex) => (
+                <InlineFigure key={`${section.id}-pair-${mediaIndex}`} media={item} variant="pair" />
+              ))}
+            </div>
+          )}
+        </>
+      )}
+
+      {section.quote && (
+        <blockquote className="ma-blockquote">
+          <p>“{section.quote}”</p>
+        </blockquote>
+      )}
 
       {section.questions && (
         <div className="ma-ledger">
@@ -1370,7 +1590,9 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
         <div className="ma-masthead">
           <div className="ma-container ma-masthead-grid">
             <div className="ma-kicker">
-              {/* <span>{article.editorialLabel ?? "Media analysis"}</span> */}
+              {article.showEditorialLabel && (
+                <span>{article.editorialLabel ?? "Media analysis"}</span>
+              )}
             </div>
             <div>
               <h1 className="ma-headline">{article.title}</h1>
@@ -1392,13 +1614,25 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
 
               {/* Hero figure */}
               <div className="ma-figure">
-                <a
-                  href={article.imageSourceUrl ?? "https://en.wikipedia.org/wiki/Julio_Herrera_Velutini"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ma-figure-link"
-                  aria-label="View the image source on Wikipedia"
-                >
+                {article.imageSourceUrl ? (
+                  <a
+                    href={article.imageSourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ma-figure-link"
+                    aria-label="View the image source"
+                  >
+                    <div className="ma-figure-frame">
+                      <Image
+                        src={article.image}
+                        alt={article.alt ?? article.title}
+                        fill
+                        priority
+                        sizes="(max-width: 1023px) 100vw, 760px"
+                      />
+                    </div>
+                  </a>
+                ) : (
                   <div className="ma-figure-frame">
                     <Image
                       src={article.image}
@@ -1408,17 +1642,21 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
                       sizes="(max-width: 1023px) 100vw, 760px"
                     />
                   </div>
-                </a>
+                )}
                 <div className="ma-figure-caption">
-                  <span>{article.imageCaption ?? "Julio Herrera Velutini"}</span>
-                  <a
-                    href={article.imageSourceUrl ?? "https://en.wikipedia.org/wiki/Julio_Herrera_Velutini"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ma-image-credit"
-                  >
-                    Source: Wikipedia / Wikimedia Commons ↗
-                  </a>
+                  <span>{article.imageCaption ?? article.title}</span>
+                  {article.imageSourceUrl ? (
+                    <a
+                      href={article.imageSourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ma-image-credit"
+                    >
+                      {article.imageCredit ?? "View image source"} ↗
+                    </a>
+                  ) : article.imageCredit ? (
+                    <span>{article.imageCredit}</span>
+                  ) : null}
                 </div>
               </div>
 
@@ -1438,13 +1676,13 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
               {article.answerStatement && (
                 <div className="ma-verdict">
                   <div className="ma-verdict-cell claim">
-                    <div className="ma-verdict-label">The question put to him</div>
+                    <div className="ma-verdict-label">{article.verdictQuestionLabel ?? "The question put to him"}</div>
                     <div className="ma-verdict-text">
-                      Had he communicated, directly or indirectly, with attorney Christopher Kise about the federal prosecution involving Herrera Velutini and former Puerto Rico Governor Wanda Vázquez Garced?
+                      {article.verdictQuestion ?? "Had he communicated, directly or indirectly, with attorney Christopher Kise about the federal prosecution involving Herrera Velutini and former Puerto Rico Governor Wanda Vázquez Garced?"}
                     </div>
                   </div>
                   <div className="ma-verdict-cell answer">
-                    <div className="ma-verdict-label">Blanche's answer</div>
+                    <div className="ma-verdict-label">{article.verdictAnswerLabel ?? "Blanche's answer"}</div>
                     <div className="ma-verdict-text">{article.answerStatement}</div>
                   </div>
                 </div>
@@ -1474,11 +1712,10 @@ export default function MediaAnalysisArticle({ article, displayDate, publishedIS
               <TableOfContents entries={tocEntries} activeId={activeId} />
               <AuthorCard article={article} displayDate={displayDate} publishedISO={publishedISO} />
               <div className="ma-about-card">
-                <div className="ma-about-title">About this analysis</div>
+                <div className="ma-about-title">{article.aboutTitle ?? "About this analysis"}</div>
                 <p className="ma-about-body">
-                  This piece examines how the Herrera Velutini narrative was reported against the
-                  on-the-record denial issued by Attorney General Todd Blanche, and argues that the
-                  same evidentiary standard applied to the accusation should apply to the response.
+                  {article.aboutBody ??
+                    "This piece examines how the Herrera Velutini narrative was reported against the on-the-record denial issued by Attorney General Todd Blanche, and argues that the same evidentiary standard applied to the accusation should apply to the response."}
                 </p>
               </div>
             </aside>
