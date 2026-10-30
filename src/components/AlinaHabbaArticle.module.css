@@ -158,3 +158,11 @@
   .rail { position: static; margin-top: 32px; }
   .main { max-width: none; }
 }
+/* A clear opening paragraph and a restrained news layout. */
+.prose .lede { font-size: 23px; line-height: 1.65; color: #211e19; margin-bottom: 30px; }
+.prose .lede::first-letter { float: left; font-size: 68px; line-height: .85; margin: 9px 9px 0 0; color: #af262e; }
+.figure { border-top: 3px solid #af262e; }
+.railTitle { font-family: Arial, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+.hero h1 { max-width: 21ch; }
+.layout { margin-top: 40px; padding-top: 32px; border-top: 1px solid #ded7cc; }
+@media (max-width: 600px) { .hero h1 { max-width: none; font-size: 35px; line-height: 1.12; } .prose .lede { font-size: 21px; } .layout { margin-top: 28px; padding-top: 28px; } }

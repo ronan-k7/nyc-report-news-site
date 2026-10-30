@@ -44,6 +44,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [{
+      source: "/politics/trump-erupted-alina-habba-50-million-deal",
+      destination: "/politics/trump-reportedly-erupted-alina-habba-50-million-deal",
+      permanent: true,
+    }];
+  },
   images: {
     unoptimized: true,
   },

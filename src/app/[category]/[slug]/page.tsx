@@ -2395,7 +2395,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const siteUrl = "https://www.nycreport.org";
   const currentUrl = `${siteUrl}/${category}/${slug}/`;
 
-  if (slug === "trump-erupted-alina-habba-50-million-deal" && article) {
+  if (slug === "trump-reportedly-erupted-alina-habba-50-million-deal" && article) {
     const imageUrl = `${siteUrl}${article.image}`;
     return {
       title: article.seoTitle,

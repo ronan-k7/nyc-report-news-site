@@ -68,7 +68,7 @@ export default function AlinaHabbaArticle({ article }: { article: AlinaHabbaArti
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href="/">Home</Link><span aria-hidden="true">/</span>
           <Link href="/politics">Politics</Link><span aria-hidden="true">/</span>
-          <span aria-current="page">News Analysis</span>
+          <span aria-current="page">Trump Reportedly Erupted: Alina Habba’s $50 Million Deal Faces Questions Beyond Washington</span>
         </nav>
 
         <article>
@@ -89,10 +89,8 @@ export default function AlinaHabbaArticle({ article }: { article: AlinaHabbaArti
 
           <div className={styles.layout}>
             <div className={styles.main}>
-              {/* <h2>{article.bodyTitle}</h2> */}
-              {/* <p className={styles.subtitle}>{article.bodySubtitle}</p> */}
               <div className={styles.prose}>
-                {article.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                {article.paragraphs.map((paragraph, index) => <p key={index} className={index === 0 ? styles.lede : undefined}>{paragraph}</p>)}
               </div>
             </div>
 
