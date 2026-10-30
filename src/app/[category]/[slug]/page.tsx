@@ -1982,6 +1982,7 @@
 // }
 
 // src/app/[category]/[slug]/page.tsx
+import AlinaHabbaArticle, { type AlinaHabbaArticleData } from "@/components/AlinaHabbaArticle";
 import ArticleHero from "@/components/ArticleHero";
 import WandaVazquezArticle from "@/components/WandaVazquezArticle";
 import DonaldTrumpArticle from "@/components/DonaldTrump";
@@ -2394,6 +2395,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const siteUrl = "https://www.nycreport.org";
   const currentUrl = `${siteUrl}/${category}/${slug}/`;
 
+  if (slug === "trump-erupted-alina-habba-50-million-deal" && article) {
+    const imageUrl = `${siteUrl}${article.image}`;
+    return {
+      title: article.seoTitle,
+      description: article.metaDescription,
+      keywords: article.keywords,
+      authors: [{ name: article.author, url: `${siteUrl}/roy-j-miles` }],
+      alternates: { canonical: currentUrl },
+      openGraph: {
+        title: article.seoTitle, description: article.metaDescription,
+        url: currentUrl, siteName: "NYC Report", type: "article",
+        publishedTime: safeISOString(article.date), section: "Politics",
+        tags: ["Alina Habba", "Donald Trump", "Julio Herrera Velutini", "Concord Partners", "Presidential Pardon", "New York Times"],
+        images: [{ url: imageUrl, width: 945, height: 533, alt: article.alt }],
+      },
+      twitter: {
+        card: "summary_large_image", title: article.seoTitle,
+        description: article.metaDescription,
+        images: [{ url: imageUrl, alt: article.alt }], site: "@nycreport_",
+      },
+    };
+  }
+
+
   if (slug === "wanda-vazquez-bribery-case-collapses") {
     return {
       title: "Wanda Vázquez Bribery Case Collapses – Only Minor Violation Remains",
@@ -2547,6 +2572,11 @@ export default async function DetailPage({ params }: PageProps) {
   if (!article) {
     return <div className="p-4">No article found for slug: {slug}</div>;
   }
+
+  if (article.articleType === "habba-analysis") {
+    return <AlinaHabbaArticle article={article as unknown as AlinaHabbaArticleData} />;
+  }
+
 
   /* ── Hard-coded special routes ── */
 
