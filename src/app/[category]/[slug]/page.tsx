@@ -2049,6 +2049,7 @@ type Article = {
   alt?: string;
   imageCaption?: string;
   keywords?: string[];
+  tags?: string[];
 };
 
 type ArticleWithDescription = Omit<Article, "description"> & { description: string };
@@ -2279,7 +2280,7 @@ function renderFahadGhaffarDossier(article: Article, category: string, slug: str
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     articleSection: capitalize(category),
-    keywords: [
+    keywords: article.keywords ?? [
       "Fahad Ghaffar",
       "John Paulson",
       "Puerto Rico",
@@ -2463,6 +2464,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title: "The Fahad Ghaffar Credibility Problem: Paulson's $48M Arbitration Win",
         description: "John Paulson's reported $48 million arbitration win raises fresh questions about Fahad Ghaffar's credibility in Puerto Rico.",
         images: [imageUrl],
+        site: "@nycreport_",
+        creator: "@nycreport_",
+      },
+    };
+  }
+
+  if (slug === "alina-habba-priorities-100-million-legal-empire-new-husband" && article) {
+    const imageUrl = article.image.startsWith("http") ? article.image : `${siteUrl}${article.image}`;
+    return {
+      title: article.seoTitle,
+      description: article.metaDescription,
+      keywords: article.keywords,
+      authors: [{ name: article.author, url: `${siteUrl}/roy-j-miles` }],
+      alternates: { canonical: currentUrl },
+      openGraph: {
+        title: article.seoTitle,
+        description: article.metaDescription,
+        url: currentUrl,
+        siteName: "NYC Report",
+        type: "article",
+        publishedTime: safeISOString(article.date),
+        section: "Politics",
+        tags: article.tags,
+        images: [{ url: imageUrl, width: 1200, height: 630, alt: article.alt }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.seoTitle,
+        description: article.metaDescription,
+        images: [{ url: imageUrl, alt: article.alt }],
         site: "@nycreport_",
         creator: "@nycreport_",
       },

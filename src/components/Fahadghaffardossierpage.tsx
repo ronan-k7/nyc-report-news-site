@@ -632,6 +632,9 @@ export interface FahadGhaffarArticleData {
   accountingQuestions?: string[];
   sources?: DossierSource[];
   relatedLinks?: DossierRelatedLink[];
+  keywords?: string[];
+  keyFactsLabel?: string;
+  aboutNote?: string;
 }
 
 interface Props {
@@ -861,6 +864,7 @@ const styles = `
    SUB-COMPONENTS
 ───────────────────────────────────────────────────────────────────────────── */
 function SectionBlock({ section, index }: { section: DossierSection; index: number }) {
+  // index is the zero-based position among sections that have a heading
   return (
     <div id={section.id} className="fg-section">
       {section.heading && (
@@ -954,7 +958,9 @@ function RelatedPanel({ links }: { links: DossierRelatedLink[] }) {
   );
 }
 
-function SectionsIndex({ sections }: { sections: DossierSection[] }) {
+function SectionsIndex({ sections: allSections }: { sections: DossierSection[] }) {
+  // Sections without a heading (e.g. an opening block) are not listed in the index
+  const sections = allSections.filter((s) => s.heading);
   return (
     <div className="fg-sidebar-card">
       <div className="fg-sidebar-card-header">
@@ -981,6 +987,9 @@ function SectionsIndex({ sections }: { sections: DossierSection[] }) {
    MAIN EXPORT
 ───────────────────────────────────────────────────────────────────────────── */
 export default function FahadGhaffarDossierPage({ article, displayDate, publishedISO }: Props) {
+  // Number only the sections that have a heading
+  let headedCount = 0;
+  const sectionNumbers = (article.sections ?? []).map((s) => (s.heading ? headedCount++ : -1));
   return (
     <>
       <style>{styles}</style>
@@ -1055,7 +1064,7 @@ export default function FahadGhaffarDossierPage({ article, displayDate, publishe
                       <span className="fg-glance-dot" style={{ background: "#ffc107" }} />
                       <span className="fg-glance-dot" style={{ background: "#28a745" }} />
                     </div>
-                    <span className="fg-glance-label">Case Summary — Key Facts</span>
+                    <span className="fg-glance-label">{article.keyFactsLabel ?? "Case Summary — Key Facts"}</span>
                     <div style={{ width: 64 }} />
                   </div>
                   {article.keyFacts.map((fact, i) => (
@@ -1080,7 +1089,7 @@ export default function FahadGhaffarDossierPage({ article, displayDate, publishe
 
               {/* Sections */}
               {article.sections?.map((section, i) => (
-                <SectionBlock key={section.id} section={section} index={i} />
+                <SectionBlock key={section.id} section={section} index={sectionNumbers[i]} />
               ))}
 
               {/* Questions */}
@@ -1140,10 +1149,8 @@ export default function FahadGhaffarDossierPage({ article, displayDate, publishe
                   <span className="fg-about-label">About This Report</span>
                 </div>
                 <p className="fg-about-body">
-                  This report is based on publicly available court filings, a civil RICO complaint filed
-                  in U.S. District Court for the District of Puerto Rico, DOJ public records, AP reporting,
-                  and local Puerto Rico news coverage. Allegations have not been fully adjudicated.
-                  The reported arbitration result has not been confirmed in a public court order.
+                  {article.aboutNote ??
+                    "This report is based on publicly available court filings, a civil RICO complaint filed in U.S. District Court for the District of Puerto Rico, DOJ public records, AP reporting, and local Puerto Rico news coverage. Allegations have not been fully adjudicated. The reported arbitration result has not been confirmed in a public court order."}
                 </p>
                 <div className="fg-about-footer">
                   <span className="fg-about-by">By</span>

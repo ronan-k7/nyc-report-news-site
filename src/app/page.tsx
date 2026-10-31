@@ -163,19 +163,19 @@ export default function Home() {
     <div className="container py-3 px-3 px-md-4 px-lg-1 mx-auto">
 
 
-      <NewsArticleComponent mainArticle={politicsData[36]} />
+      <NewsArticleComponent mainArticle={politicsData[37]} />
 
 
       <div className="row width-first justify-content-center">
         <div className="col-lg-8">
           <NewsBus
-            title={puertoricoData[18].title}
-             shortdescription={puertoricoData[18].shortdescription ?? ''}
+            title={politicsData[36].title}
+             shortdescription={politicsData[36].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={puertoricoData[18].image}
-            category={puertoricoData[18].category}
-            slug={puertoricoData[18].slug}
-            author={puertoricoData[18].author}
+            imageUrl={politicsData[36].image}
+            category={politicsData[36].category}
+            slug={politicsData[36].slug}
+            author={politicsData[36].author}
           />
           <NewsBus
             title={sportsData[0].title}
@@ -187,13 +187,13 @@ export default function Home() {
             author={sportsData[0].author}
           /> 
           <NewsBus
-            title={technologyData[0].title}
-            shortdescription={technologyData[0].shortdescription ?? ''}
+            title={puertoricoData[18].title}
+            shortdescription={puertoricoData[18].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={technologyData[0].image}
-            category={technologyData[0].category}
-            slug={technologyData[0].slug}
-            author={technologyData[0].author}
+            imageUrl={puertoricoData[18].image}
+            category={puertoricoData[18].category}
+            slug={puertoricoData[18].slug}
+            author={puertoricoData[18].author}
           />
         </div>
         <div className="col-lg-4">
