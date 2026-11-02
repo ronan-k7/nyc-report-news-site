@@ -582,6 +582,7 @@
 
 "use client";
 
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -593,12 +594,20 @@ export interface KeyFact {
   value: string;
 }
 
+export interface DossierInlineQuote {
+  /** zero-based index of the body paragraph this quote appears after */
+  afterParagraph: number;
+  text: string;
+  stats?: { value: string; label: string }[];
+}
+
 export interface DossierSection {
   id: string;
   heading: string;
   subheading?: string;
   body: string[];
   pullQuote?: string;
+  quotes?: DossierInlineQuote[];
 }
 
 export interface DossierSource {
@@ -771,6 +780,28 @@ const styles = `
     font-weight: 600; font-style: italic; color: #333; margin: 0;
   }
 
+  /* Inline highlighted quote (light tint so it stands out from the white article) */
+  .fg-inline-quote {
+    margin: 1.75rem 0 2rem; padding: 1.25rem 1.5rem 1.35rem;
+    background: #fdeaea; border: 1px solid #f3c9cc; border-left: 5px solid #dc3545;
+    border-radius: 0 10px 10px 0;
+  }
+  .fg-inline-quote-stats { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0 0 14px; padding-bottom: 14px; border-bottom: 1px solid #efc3c6; }
+  .fg-inline-quote-stat { display: flex; flex-direction: column; gap: 2px; }
+  .fg-inline-quote-stat-value {
+    font-family: 'Times New Roman', Georgia, serif; font-size: 1.9rem; font-weight: 700;
+    line-height: 1.1; color: #b02a37;
+  }
+  .fg-inline-quote-stat-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a3a3d;
+  }
+  .fg-inline-quote blockquote { margin: 0; padding: 0; border: 0; }
+  .fg-inline-quote blockquote p {
+    font-family: Georgia, serif; font-size: 1.1rem; line-height: 1.75;
+    font-style: italic; font-weight: 500; color: #2a1d1e; margin: 0;
+  }
+
   /* Questions panel */
   .fg-questions-panel { border: 1px solid #e9ecef; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 2.5rem; }
   .fg-questions-header {
@@ -875,7 +906,24 @@ function SectionBlock({ section, index }: { section: DossierSection; index: numb
       )}
       {section.subheading && <p className="fg-section-subheading">{section.subheading}</p>}
       {section.body.map((para, i) => (
-        <p key={i} className="fg-body-text">{para}</p>
+        <Fragment key={i}>
+          <p className="fg-body-text">{para}</p>
+          {section.quotes?.filter((q) => q.afterParagraph === i).map((q, qi) => (
+            <aside key={qi} className="fg-inline-quote">
+              {q.stats && q.stats.length > 0 && (
+                <div className="fg-inline-quote-stats">
+                  {q.stats.map((stat) => (
+                    <div key={stat.label} className="fg-inline-quote-stat">
+                      <span className="fg-inline-quote-stat-value">{stat.value}</span>
+                      <span className="fg-inline-quote-stat-label">{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <blockquote><p>{q.text}</p></blockquote>
+            </aside>
+          ))}
+        </Fragment>
       ))}
       {section.pullQuote && (
         <div className="fg-pull-quote"><p>{section.pullQuote}</p></div>

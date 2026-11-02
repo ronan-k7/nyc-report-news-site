@@ -506,6 +506,16 @@
           "According to a source close to the family, Habba began working in January 2026 with expectations that she would coordinate more than 20 law firms across four continents and help control approximately $100 million in annual legal and advisory fees.",
           "But the source alleges that the promised financial discipline and restructuring have failed to materialize."
         ],
+        "quotes": [
+          {
+            "afterParagraph": 2,
+            "stats": [
+              { "value": "20+", "label": "law firms" },
+              { "value": "$100M", "label": "yearly legal and advisory spending" }
+            ],
+            "text": "Habba’s responsibilities included coordinating more than 20 law firms and overseeing approximately $100 million in annual legal and advisory expenditure. If accurate, that description would place her at the center of a substantial operation requiring sustained coordination, oversight and reporting."
+          }
+        ],
         "pullQuote": "Millions in potential compensation. Hundreds of millions in legal spending over four years. Where are the results?"
       },
       {
