@@ -1,0 +1,89 @@
+/* Scoped to the new article; uses the existing client's red, white and serif theme. */
+.page { background: #fff; color: #111; padding-bottom: 72px; }
+.breadcrumbBar { background: #dc3545; }
+.breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 1100px; margin: 0 auto; padding: 10px 30px; font: 600 12px/1.6 Arial, sans-serif; color: #fff; }
+.breadcrumb a { color: #fff; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.article { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
+.hero { padding: 52px 0 26px; max-width: 900px; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 24px; color: #666; font: 12px/1.5 Arial, sans-serif; }
+.badge { color: #fff; background: #dc3545; border-radius: 20px; padding: 5px 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+.badge:hover { color: #fff; background: #b52c39; }
+.hero h1 { font: 700 clamp(36px, 4.8vw, 60px)/1.08 'Times New Roman', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; max-width: 22ch; margin: 0 0 22px; }
+.subtitle { color: #555; font: 21px/1.6 Georgia, serif; max-width: 42em; text-wrap: pretty; margin: 0 0 24px; }
+.byline { font: 700 12px/1.5 Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; margin: 0; }
+.byline a { color: #555; text-decoration: none; }
+.byline a:hover { color: #dc3545; }
+.figure { border-top: 3px solid #dc3545; margin: 0; overflow: hidden; background: #f8f9fa; }
+.figure img { display: block; width: 100%; height: auto; }
+.readingLayout { display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 292px); gap: 48px; padding: 42px 0 0; border-top: 1px solid #e9ecef; margin-top: 28px; align-items: start; }
+.prose { min-width: 0; }
+.prose p { font: 19px/1.85 Georgia, 'Times New Roman', serif; color: #292929; margin: 0 0 1.35em; overflow-wrap: break-word; }
+.prose .lede { font-size: 21px; line-height: 1.8; color: #111; }
+.lede::first-letter { float: left; color: #dc3545; font-size: 70px; line-height: .9; padding: 9px 10px 0 0; font-weight: 700; }
+.prose .closing { font-weight: 700; padding-left: 24px; border-left: 3px solid #dc3545; }
+.prose p:last-child { margin-bottom: 0; }
+.prose p[id] { scroll-margin-top: 32px; }
+.sidebar { align-self: stretch; min-width: 0; }
+.sidebarInner { position: sticky; top: 24px; }
+.sidebar h2 { font: 700 12px/1.5 Arial, sans-serif; text-transform: uppercase; letter-spacing: .1em; color: #111; padding-top: 16px; margin: 0 0 18px; border-top: 3px solid #dc3545; }
+.contents ol { list-style: none; padding: 0; margin: 0 0 34px; }
+.contents li { border-bottom: 1px solid #e9ecef; }
+.contents a { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; font: 15px/1.4 Georgia, serif; color: #333; text-decoration: none; }
+.contents a span { color: #dc3545; font: 700 10px/1.5 Arial, sans-serif; }
+.contents a:hover { color: #dc3545; text-decoration: underline; text-underline-offset: 3px; }
+.timeline ol { list-style: none; border-left: 1px solid #e3c9cd; margin: 0 0 0 5px; padding: 0 0 0 20px; }
+.timeline li { position: relative; padding: 0 0 23px; }
+.timeline li::before { content: ''; position: absolute; top: 5px; left: -25px; width: 9px; height: 9px; background: #dc3545; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #dc3545; }
+.timeline h3 { font: 700 12px/1.5 Arial, sans-serif; color: #b52c39; margin: 0 0 7px; }
+.timeline p { font: 14px/1.7 Georgia, serif; color: #555; margin: 0; }
+.highlight { background: #fff5f5; border-left: 4px solid #dc3545; padding: 28px; margin: 34px 0; }
+.stats { display: grid; grid-template-columns: .8fr 1.2fr; gap: 22px; padding-bottom: 24px; border-bottom: 1px solid #eedbde; }
+.stats > div + div { border-left: 1px solid #eedbde; padding-left: 22px; }
+.stats strong { display: block; font: 700 38px/1.1 'Times New Roman', Georgia, serif; color: #b52c39; margin-bottom: 6px; }
+.stats span { display: block; font: 12px/1.6 Arial, sans-serif; color: #555; }
+.highlight blockquote { margin: 22px 0 0; }
+.highlight blockquote p { font-size: 18px; font-style: italic; line-height: 1.8; margin: 0; color: #4e373b; }
+.page a:focus-visible { outline: 2px solid #111; outline-offset: 4px; }
+@media (max-width: 900px) {
+  .hero { padding-top: 36px; }
+  .readingLayout { display: flex; flex-direction: column; max-width: 730px; margin-left: auto; margin-right: auto; padding-top: 32px; gap: 32px; }
+  .sidebar { order: -1; width: 100%; }
+  .sidebarInner { position: static; max-height: none; overflow: visible; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 0; }
+  .contents ol { margin-bottom: 0; }
+}
+@media (max-width: 600px) {
+  .article { padding: 0 20px; }
+  .breadcrumb { padding: 10px 20px; font-size: 11px; }
+  .hero { padding: 28px 0 22px; }
+  .hero h1 { font-size: 38px; max-width: none; margin-bottom: 18px; }
+  .meta { gap: 10px 14px; margin-bottom: 20px; }
+  .subtitle { font-size: 18px; line-height: 1.6; }
+  .figure { margin-left: -20px; margin-right: -20px; }
+  .readingLayout { margin-top: 24px; padding-top: 26px; }
+  .prose p { font-size: 18px; line-height: 1.8; }
+  .prose .lede { font-size: 20px; }
+  .prose .closing { padding-left: 18px; }
+  .sidebarInner { display: block; }
+  .timeline { margin-top: 28px; }
+  .timeline ol { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; border: 0; padding: 0; margin: 0; }
+  .timeline li { padding-left: 15px; }
+  .timeline li::before { left: 0; }
+  .timeline p { font-size: 13px; }
+  .contents ol { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+  .contents a { font-size: 14px; }
+  .highlight { padding: 22px 20px; }
+  .stats { gap: 16px; }
+  .stats > div + div { padding-left: 16px; }
+  .stats strong { font-size: 34px; }
+  .highlight blockquote p { font-size: 17px; }
+}
+@media print {
+  .breadcrumbBar { display: none; }
+  .sidebarInner { position: static; max-height: none; overflow: visible; }
+  .sidebar { margin-top: 32px; }
+  .readingLayout { display: block; }
+  .figure { max-width: 480px; }
+  .hero { padding-top: 0; }
+  .page { padding-bottom: 0; }
+}

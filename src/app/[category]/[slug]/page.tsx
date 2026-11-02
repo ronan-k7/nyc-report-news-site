@@ -1,3 +1,4 @@
+import HabbaVanityArticle, { type HabbaVanityArticleData } from "@/components/HabbaVanityArticle";
 // // // // import politicsData from '../../../../public/data/politics.json';
 // // // // import businessData from '../../../../public/data/business.json';
 // // // // import technologyData from '../../../../public/data/technology.json';
@@ -2396,6 +2397,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const siteUrl = "https://www.nycreport.org";
   const currentUrl = `${siteUrl}/${category}/${slug}/`;
 
+  if (article?.articleType === "habba-vanity") {
+    const imageUrl = `${siteUrl}${article.image}`;
+    return {
+      title: { absolute: article.seoTitle ?? article.title },
+      description: article.metaDescription,
+      keywords: article.keywords,
+      authors: [{ name: article.author, url: `${siteUrl}/roy-j-miles` }],
+      alternates: { canonical: currentUrl },
+      openGraph: {
+        title: article.seoTitle, description: article.metaDescription,
+        url: currentUrl, siteName: "NYC Report", type: "article",
+        publishedTime: `${article.date}T00:00:00-05:00`, section: "Politics",
+        tags: article.tags,
+        images: [{ url: imageUrl, width: 4000, height: 2666, alt: article.alt }],
+      },
+      twitter: {
+        card: "summary_large_image", title: article.seoTitle,
+        description: article.metaDescription,
+        images: [{ url: imageUrl, alt: article.alt }], site: "@nycreport_",
+      },
+    };
+  }
+
   if (slug === "trump-reportedly-erupted-alina-habba-50-million-deal" && article) {
     const imageUrl = `${siteUrl}${article.image}`;
     return {
@@ -2602,6 +2626,10 @@ export default async function DetailPage({ params }: PageProps) {
   const article = getArticleBySlug(slug);
   if (!article) {
     return <div className="p-4">No article found for slug: {slug}</div>;
+  }
+
+  if (article.articleType === "habba-vanity") {
+    return <HabbaVanityArticle article={article as unknown as HabbaVanityArticleData} />;
   }
 
   if (article.articleType === "habba-analysis") {
