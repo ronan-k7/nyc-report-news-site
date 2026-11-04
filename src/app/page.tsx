@@ -203,13 +203,13 @@ export default function Home() {
       <div className="row justify-content-center">
         <div className="col-lg-3 border-end">
           <NewsCard
-            image={healthData[32].image}
-            imageAlt={healthData[32].slug}
+            image={politicsData[39].image}
+            imageAlt={politicsData[39].slug}
             number="01"
-            category={healthData[32].category}
-            title={healthData[32].title}
-            slug={healthData[32].slug}
-            author={healthData[32].author}
+            category={politicsData[39].category}
+            title={politicsData[39].title}
+            slug={politicsData[39].slug}
+            author={politicsData[39].author}
           />
         </div>
 
