@@ -215,13 +215,13 @@ export default function Home() {
 
         <div className="col-lg-3 border-end">
           <NewsCard
-            image={healthData[33].image}
-            imageAlt={healthData[33].slug}
+            image={technologyData[0].image}
+            imageAlt={technologyData[0].slug}
             number="02"
-            category={healthData[33].category}
-            title={healthData[33].title  }
-            slug={healthData[33].slug}
-            author={healthData[33].author}
+            category={technologyData[0].category}
+            title={technologyData[0].title  }
+            slug={technologyData[0].slug}
+            author={technologyData[0].author}
  
           />
         </div>

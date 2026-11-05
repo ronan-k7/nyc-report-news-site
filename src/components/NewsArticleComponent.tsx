@@ -31,29 +31,29 @@ const NewsArticleComponent: React.FC<NewsArticleProps> = ({
   mainArticle,
   sidebarTitle = 'LIVE UPDATES',
   sidebarItems = [
-  {
-    time: '10:30',
-    category: 'INSIGHT',
-    title: 'US and Iran Sign Peace Agreement Following Months of Tensions',
-    isBreaking: true,
-  },
-  {
-    time: '10:25',
-    title: 'Apple Introduces AI-Powered Siri and iOS 27 at WWDC 2026',
-  },
-  {
-    time: '10:20',
-    title: "Lionel Messi Matches Men's World Cup Goals Record with Hat Trick",
-  },
-  {
-    time: '10:12',
-    title: 'NASA Reveals Artemis III Crew for Upcoming Moon Mission',
-  },
-  {
-    time: '10:08',
-    title: 'Global Leaders Discuss New Security and Trade Initiatives',
-  },
-],
+    {
+      time: '10:30',
+      category: 'INSIGHT',
+      title: 'Democrats Win Control of House and Senate in Sweeping Midterm Rout',
+      isBreaking: true,
+    },
+    {
+      time: '10:25',
+      title: 'Dow Soars More Than 1,500 Points, Its Best Day Since April 2025',
+    },
+    {
+      time: '10:20',
+      title: 'Oil Plunges About 8% as Markets Weigh Hopes of an Iran Peace Deal',
+    },
+    {
+      time: '10:12',
+      title: 'Russia Bombs Kharkiv Hospital Ahead of Abu Dhabi Peace Talks',
+    },
+    {
+      time: '10:08',
+      title: 'Google Links Student Search to AI Tools, Drawing NYC Backlash',
+    },
+  ],
   continueButton = 'continue',
 }) => {
   const mainHref = `/${getCategorySlug(mainArticle.category ?? '')}/${mainArticle.slug}`;

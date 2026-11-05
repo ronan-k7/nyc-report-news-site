@@ -178,16 +178,16 @@ import { usePathname } from "next/navigation";
 // ─── Static fallback — always shown until live data arrives ──────────────────
 // These are recent-ish values so the ticker is never empty or broken.
 const STATIC_STOCKS = [
-  { name: "Nvidia (NVDA)",        value: "$204.65",   change: "+1.84%", changeType: "positive" },
-  { name: "S&P 500",              value: "7,420.10",  change: "-1.21%", changeType: "negative" },
-  { name: "Nasdaq 100",           value: "29,670.95", change: "-0.99%", changeType: "negative" },
-  { name: "Dow Jones",            value: "51,492.55", change: "-0.98%", changeType: "negative" },
-  { name: "Bitcoin (BTC/USD)",    value: "$71,500",   change: "+2.43%", changeType: "positive" },
-  { name: "Ethereum (ETH/USD)",   value: "$4,120",    change: "+1.76%", changeType: "positive" },
-  { name: "Gold (XAU/USD)",       value: "$4,328.00", change: "+2.68%", changeType: "positive" },
-  { name: "Brent Crude Oil",      value: "$78.41",    change: "-5.00%", changeType: "negative" },
-  { name: "Microsoft (MSFT)",     value: "$378.85",   change: "-3.80%", changeType: "negative" },
-  { name: "Amazon (AMZN)",        value: "$237.44",   change: "+1.11%", changeType: "positive" },
+  { name: "Nvidia (NVDA)",        value: "$200.13",    change: "-3.17%", changeType: "negative" },
+  { name: "S&P 500",              value: "7,688.62",   change: "+1.58%", changeType: "positive" },
+  { name: "Nasdaq 100",           value: "28,437.17",  change: "+0.91%", changeType: "positive" },
+  { name: "Dow Jones",            value: "53,356.12",  change: "+3.03%", changeType: "positive" },
+  { name: "Bitcoin (BTC/USD)",    value: "$80,529",    change: "+3.70%", changeType: "positive" },
+  { name: "Ethereum (ETH/USD)",   value: "$2,439",     change: "+6.20%", changeType: "positive" },
+  { name: "Gold (XAU/USD)",       value: "$4,048.74",  change: "+2.98%", changeType: "positive" },
+  { name: "Brent Crude Oil",      value: "$94.60",     change: "-8.69%", changeType: "negative" },
+  { name: "Microsoft (MSFT)",     value: "$555.80",    change: "+6.68%", changeType: "positive" },
+  { name: "Amazon (AMZN)",        value: "$266.03",    change: "+6.12%", changeType: "positive" },
 ];
 
 // ─── Fetch live data from our own Next.js API route ──────────────────────────
