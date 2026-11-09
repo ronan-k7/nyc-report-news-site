@@ -227,13 +227,13 @@ export default function Home() {
         </div>
         <div className="col-lg-3 border-end">
           <NewsCard
-            image={healthData[25].image}
-            imageAlt={healthData[25].slug}
+            image={healthData[0].image}
+            imageAlt={healthData[0].slug}
             number="03"
-            category={healthData[25].category}
-            title={healthData[25].title}
-            slug={healthData[25].slug}
-            author={healthData[25].author}
+            category={healthData[0].category}
+            title={healthData[0].title}
+            slug={healthData[0].slug}
+            author={healthData[0].author}
           />
         </div>
         
