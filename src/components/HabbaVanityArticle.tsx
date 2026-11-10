@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import styles from "./HabbaVanityArticle.module.css";
+import ArticleTags from "./ArticleTags";
 
 export interface HabbaVanityArticleData {
   title: string;
@@ -15,6 +16,7 @@ export interface HabbaVanityArticleData {
   image: string;
   alt: string;
   keywords: string[];
+  tags?: string[];
   highlight: { firms: string; spending: string; quote: string };
   contents: { id: string; label: string; paragraph: number }[];
   timeline: { date: string; text: string }[];
@@ -105,6 +107,7 @@ export default function HabbaVanityArticle({ article }: { article: HabbaVanityAr
             </div>
           </aside>
         </div>
+        <ArticleTags tags={article.tags} />
       </article>
     </main>
   );

@@ -2432,7 +2432,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title: article.seoTitle, description: article.metaDescription,
         url: currentUrl, siteName: "NYC Report", type: "article",
         publishedTime: safeISOString(article.date), section: "Politics",
-        tags: ["Alina Habba", "Donald Trump", "Julio Herrera Velutini", "Concord Partners", "Presidential Pardon", "New York Times"],
+        tags: article.tags,
         images: [{ url: imageUrl, width: 945, height: 533, alt: article.alt }],
       },
       twitter: {

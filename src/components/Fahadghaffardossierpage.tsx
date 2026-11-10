@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ArticleTags from "./ArticleTags";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    TYPES
@@ -65,6 +66,7 @@ export interface FahadGhaffarArticleData {
   sources?: DossierSource[];
   relatedLinks?: DossierRelatedLink[];
   keywords?: string[];
+  tags?: string[];
   keyFactsLabel?: string;
   aboutNote?: string;
   timeline?: TimelineEvent[];
@@ -613,6 +615,8 @@ export default function FahadGhaffarDossierPage({ article, displayDate, publishe
               {article.relatedLinks && article.relatedLinks.length > 0 && (
                 <RelatedPanel links={article.relatedLinks} />
               )}
+
+              <ArticleTags tags={article.tags} />
 
             </article>
 

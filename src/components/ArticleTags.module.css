@@ -1,0 +1,42 @@
+.tagBar {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 40px 0 0;
+  padding: 22px 20px;
+  background: #f9f6f0;
+  border-top: 1px solid #e6dfd1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.label {
+  flex: 0 0 auto;
+  padding-top: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #222;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip {
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-transform: lowercase;
+  color: #222;
+  background: #fcf8f1;
+  border: 1px solid #ddd3c2;
+  border-radius: 2px;
+}
+@media (max-width: 600px) {
+  .tagBar { flex-direction: column; gap: 10px; padding: 18px 16px; }
+  .label { padding-top: 0; }
+  .chip { font-size: 13px; padding: 7px 11px; }
+}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./AlinaHabbaArticle.module.css";
+import ArticleTags from "./ArticleTags";
 
 export interface AlinaHabbaArticleData {
   title: string;
@@ -108,16 +109,9 @@ export default function AlinaHabbaArticle({ article }: { article: AlinaHabbaArti
                   </ul>
                 </section>
               )}
-              {article.tags.length > 0 && (
-                <section className={styles.railBlock}>
-                  <h2 className={styles.railTitle}>Topics</h2>
-                  <ul className={styles.tags}>
-                    {article.tags.map(tag => <li key={tag}>{tag}</li>)}
-                  </ul>
-                </section>
-              )}
             </aside>
           </div>
+          <ArticleTags tags={article.tags} />
         </article>
       </div>
     </main>
