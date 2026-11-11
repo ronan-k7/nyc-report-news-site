@@ -17,6 +17,7 @@
 .figure { border-top: 3px solid #dc3545; margin: 0; overflow: hidden; background: #f8f9fa; }
 .figure img { display: block; width: 100%; height: auto; }
 .readingLayout { display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 292px); gap: 48px; padding: 42px 0 0; border-top: 1px solid #e9ecef; margin-top: 28px; align-items: start; }
+.mainCol { min-width: 0; }
 .prose { min-width: 0; }
 .prose p { font: 19px/1.85 Georgia, 'Times New Roman', serif; color: #292929; margin: 0 0 1.35em; overflow-wrap: break-word; }
 .prose .lede { font-size: 21px; line-height: 1.8; color: #111; }
@@ -44,6 +45,20 @@
 .stats span { display: block; font: 12px/1.6 Arial, sans-serif; color: #555; }
 .highlight blockquote { margin: 22px 0 0; }
 .highlight blockquote p { font-size: 18px; font-style: italic; line-height: 1.8; margin: 0; color: #4e373b; }
+
+/* ---------- Sources ---------- */
+.sources { margin: 52px 0 0; scroll-margin-top: 32px; }
+.sources h2 { font: 700 13px/1.5 Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #b52c39; margin: 0 0 16px; padding-top: 16px; border-top: 3px solid #dc3545; }
+.sourceList { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.sourceItem { display: flex; align-items: flex-start; gap: 20px; padding: 22px 24px; background: #fff5f5; border: 1px solid #eedbde; border-left: 4px solid #dc3545; }
+.sourceNumber { flex: 0 0 auto; padding: 5px 9px; background: #fff; border: 1px solid #eedbde; color: #b52c39; font: 700 11px/1.4 Arial, sans-serif; }
+.sourceContent { min-width: 0; }
+.sourcePublisher { display: block; margin-bottom: 8px; color: #666; font: 700 11px/1.4 Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.sourceLink { display: inline-flex; align-items: baseline; gap: 8px; color: #111; font: 700 19px/1.4 'Times New Roman', Georgia, serif; text-decoration: none; border-bottom: 1px solid #dc3545; overflow-wrap: anywhere; }
+.sourceLink svg { flex: 0 0 auto; color: #dc3545; align-self: center; }
+.sourceLink:hover { color: #b52c39; }
+.sourceDescription { margin: 12px 0 0; color: #555; font: 14px/1.7 Georgia, serif; }
+
 .page a:focus-visible { outline: 2px solid #111; outline-offset: 4px; }
 @media (max-width: 900px) {
   .hero { padding-top: 36px; }
@@ -77,6 +92,9 @@
   .stats > div + div { padding-left: 16px; }
   .stats strong { font-size: 34px; }
   .highlight blockquote p { font-size: 17px; }
+  .sources { margin-top: 40px; }
+  .sourceItem { flex-direction: column; gap: 12px; padding: 18px 20px; }
+  .sourceLink { font-size: 18px; }
 }
 @media print {
   .breadcrumbBar { display: none; }

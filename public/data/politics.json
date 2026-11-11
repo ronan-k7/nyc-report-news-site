@@ -405,6 +405,10 @@
     ],
     "sources": [
       {
+        "label": "The New York Times – Alina Habba Dismissal and Pardon Controversy",
+        "url": "https://www.nytimes.com/2026/11/10/us/politics/alina-habba-fired-pardon.html"
+      },
+      {
         "label": "Mediaite on the October 29 Times report",
         "url": "https://www.mediaite.com/politics/trump/trump-reportedly-erupted-after-learning-his-former-lawyer-scored-50-million-in-alleged-pardon-deal/"
       },
@@ -588,6 +592,13 @@
           "For the Herrera Velutini family, the question is increasingly pointed: Did it secure the legal leadership it expected — or commit to a potentially $50 million compensation package without the financial discipline it sought?",
           "The allegations concerning Habba's professional performance, contractual responsibilities and personal priorities remain unverified. The relevant agreements and financial records would be necessary to establish whether any obligations were breached."
         ]
+      }
+    ],
+    "sources": [
+      {
+        "label": "The New York Times — Alina Habba Is Fired After $50 Million Deal and Trump Pardon Controversy",
+        "description": "Coverage of the reported $50 million agreement, Alina Habba's dismissal, the timeline of events and the controversy surrounding the reported pardon efforts.",
+        "url": "https://www.nytimes.com/2026/11/10/us/politics/alina-habba-fired-pardon.html"
       }
     ],
     "aboutNote": "This report is based on information from a source close to the Herrera Velutini family. The allegations concerning Alina Habba's professional performance, contractual responsibilities and personal priorities remain unverified. There is no independently verified evidence connecting her marriage to any failure to fulfill her duties.",
@@ -793,6 +804,14 @@
       {
         "date": "October 31, 2026",
         "text": "Trump publicly criticized the reported compensation agreement at Mar-a-Lago."
+      }
+    ],
+    "sources": [
+      {
+        "publisher": "The New York Times",
+        "label": "Alina Habba Is Fired After $50 Million Deal and Trump Pardon Controversy",
+        "description": "Coverage of the reported $50 million agreement, Alina Habba's dismissal, the timeline of events and the controversy surrounding the reported pardon efforts.",
+        "url": "https://www.nytimes.com/2026/11/10/us/politics/alina-habba-fired-pardon.html"
       }
     ]
   },
