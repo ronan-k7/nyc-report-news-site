@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./AlinaHabbaArticle.module.css";
 import ArticleTags from "./ArticleTags";
+import NytAlinaCard from "./NytAlinaCard";
 
 export interface AlinaHabbaArticleData {
   title: string;
@@ -85,7 +86,7 @@ export default function AlinaHabbaArticle({ article }: { article: AlinaHabbaArti
           </header>
 
           <figure className={styles.figure}>
-            <Image src={article.image} alt={article.alt} width={945} height={533} priority sizes="(max-width: 1016px) 100vw, 960px" />
+            <Image src={article.image} alt={article.alt} width={945} height={533} priority sizes="(max-width: 1240px) 100vw, 1176px" />
           </figure>
 
           <div className={styles.layout}>
@@ -109,6 +110,7 @@ export default function AlinaHabbaArticle({ article }: { article: AlinaHabbaArti
                   </ul>
                 </section>
               )}
+              <NytAlinaCard />
             </aside>
           </div>
           <ArticleTags tags={article.tags} />

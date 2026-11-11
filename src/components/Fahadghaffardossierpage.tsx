@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ArticleTags from "./ArticleTags";
+import NytFahadCard from "./NytFahadCard";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    TYPES
@@ -651,6 +652,10 @@ export default function FahadGhaffarDossierPage({ article, displayDate, publishe
                     ))}
                   </ul>
                 </div>
+              )}
+
+              {article.slug === "alina-habba-priorities-100-million-legal-empire-new-husband" && (
+                <NytFahadCard />
               )}
 
               <div className="fg-about-card">

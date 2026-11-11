@@ -1,0 +1,14 @@
+.card { display: block; width: 100%; margin: 0 0 24px; border: 1px solid #ded7cc; border-radius: px; overflow: hidden; background: #fff; color: #211e19; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,.06); transition: box-shadow .2s; }
+.card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+.card:focus-visible { outline: 2px solid #af262e; outline-offset: 3px; }
+.label { display: block; padding: 10px 14px; font: 700 11px/1 Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; color:#af262e; border-bottom:1px solid #ded7cc; }
+.imageWrap { border-bottom: 1px solid #ded7cc; background: #f3f0ea; }
+.imageWrap img { display: block; width: 100%; height: auto; aspect-ratio: 640 / 851; }
+.body { padding: 14px 16px 16px; }
+.title { font: 700 15px/1.35 Georgia, 'Times New Roman', serif; margin: 0 0 8px; color: #111; }
+.desc { font: 13px/1.55 Georgia, 'Times New Roman', serif; color: #555; margin: 0 0 10px; }
+.meta { font: 11px/1.4 Arial, sans-serif; color: #7a7266; margin: 0 0 10px; }
+.cta { font: 700 12px/1.2 Arial, sans-serif; color: #af262e; }
+.card:hover .cta { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) { .card { max-width: 420px; } }
+@media print { .card { display: none; } }

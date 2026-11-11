@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import styles from "./HabbaVanityArticle.module.css";
 import ArticleTags from "./ArticleTags";
+import NytVanityCard from "./NytVanityCard";
 
 export interface HabbaVanitySource {
   publisher?: string;
@@ -157,6 +158,7 @@ export default function HabbaVanityArticle({ article }: { article: HabbaVanityAr
                   <li key={item.date}><h3>{item.date}</h3><p>{item.text}</p></li>
                 ))}</ol>
               </section>
+              <NytVanityCard />
             </div>
           </aside>
         </div>
