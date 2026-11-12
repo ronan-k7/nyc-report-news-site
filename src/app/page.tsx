@@ -519,13 +519,23 @@ export default function Home() {
           <div className="row width-first">
         <div className="col-lg-8">
           <NewsBus
+            title={sportsData[0].title}
+           shortdescription={sportsData[0].shortdescription ?? ''}
+            isPremium={true}
+            imageUrl={sportsData[0].image}
+            category={sportsData[0].category}
+            slug={sportsData[0].slug}
+            author={sportsData[0].author}
+          />
+          <NewsBus
             title={sportsData[1].title}
-           shortdescription={sportsData[1].shortdescription ?? ''}
+            shortdescription={sportsData[1].shortdescription ?? ''}
             isPremium={true}
             imageUrl={sportsData[1].image}
             category={sportsData[1].category}
             slug={sportsData[1].slug}
             author={sportsData[1].author}
+
           />
           <NewsBus
             title={sportsData[2].title}
@@ -535,16 +545,6 @@ export default function Home() {
             category={sportsData[2].category}
             slug={sportsData[2].slug}
             author={sportsData[2].author}
-
-          />
-          <NewsBus
-            title={sportsData[3].title}
-            shortdescription={sportsData[3].shortdescription ?? ''}
-            isPremium={true}
-            imageUrl={sportsData[3].image}
-            category={sportsData[3].category}
-            slug={sportsData[3].slug}
-            author={sportsData[3].author}
           />
         </div>
 
