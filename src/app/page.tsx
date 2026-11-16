@@ -11,6 +11,7 @@ import scienceData from '../../public/data/science.json'
 import healthData from '../../public/data/health.json';
 import puertoricoData from '../../public/data/puerto-rico.json'
 import entertainmentData from '../../public/data/entertainment.json';
+import educationData from '../../public/data/education.json'; 
 import Script from "next/script";
 import { title } from "process";
 import CategoryPage from "./[category]/page";
@@ -640,14 +641,14 @@ export default function Home() {
   </div>
     <div className="col-lg-3 border-end">
  <NewsSection 
-  sectionTitle="Business"
+  sectionTitle="Education"
   mainArticle={{
-    image: businessData[26].image,
-    imageAlt:businessData[26].slug,
-    category:businessData[26].category,
-    title: businessData[26].title,
-    slug:businessData[26].slug,
-    author:businessData[26].author
+    image: educationData[0].image,
+    imageAlt: educationData[0].slug,
+    category: educationData[0].category,
+    title: educationData[0].title,
+    slug: educationData[0].slug,
+    author: educationData[0].author
 
   }}
   
