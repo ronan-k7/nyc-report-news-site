@@ -112,7 +112,7 @@ export default function CampaignFinanceReportArticle({
           <span aria-hidden="true">/</span>
           <span aria-current="page">Mark Rossini’s Final Federal Case</span>
         </nav>
-
+ 
         <article>
           <header className={styles.hero}>
             <div className={styles.eyebrow}>
