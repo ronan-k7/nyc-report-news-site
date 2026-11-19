@@ -63,7 +63,9 @@
 @media (max-width: 900px) {
   .hero { padding-top: 36px; }
   .readingLayout { display: flex; flex-direction: column; max-width: 730px; margin-left: auto; margin-right: auto; padding-top: 32px; gap: 32px; }
-  .sidebar { order: -1; width: 100%; }
+
+  /* FIX: removed "order: -1" so the article comes first and the sidebar sits below it */
+  .sidebar { width: 100%; padding-top: 32px; border-top: 1px solid #e9ecef; }
   .sidebarInner { position: static; max-height: none; overflow: visible; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 0; }
   .contents ol { margin-bottom: 0; }
 }

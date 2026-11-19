@@ -30,7 +30,7 @@ export interface HabbaVanityArticleData {
   timeline: { date: string; text: string }[];
   sources?: HabbaVanitySource[];
 }
-
+ 
 export default function HabbaVanityArticle({ article }: { article: HabbaVanityArticleData }) {
   const site = "https://www.nycreport.org";
   const url = `${site}/politics/${article.slug}/`;
