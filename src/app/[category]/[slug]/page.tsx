@@ -1984,6 +1984,10 @@ import HabbaVanityArticle, { type HabbaVanityArticleData } from "@/components/Ha
 
 // src/app/[category]/[slug]/page.tsx
 import AlinaHabbaArticle, { type AlinaHabbaArticleData } from "@/components/AlinaHabbaArticle";
+import AlinaturhanmildonArticlePage, {
+  type AlinaturhanmildonArticleData,
+  type MildonRelated,
+} from "@/components/AlinaturhanmildonArticlePage";
 import ArticleHero from "@/components/ArticleHero";
 import WandaVazquezArticle from "@/components/WandaVazquezArticle";
 import DonaldTrumpArticle from "@/components/DonaldTrump";
@@ -2523,6 +2527,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  if (slug === "turhan-mildon-alina-habba-wedding-trump-political-circle" && article) {
+    const imageUrl = article.image.startsWith("http") ? article.image : `${siteUrl}${article.image}`;
+    return {
+      title: article.seoTitle,
+      description: article.metaDescription,
+      keywords: article.keywords,
+      authors: [{ name: article.author, url: `${siteUrl}/roy-j-miles` }],
+      alternates: { canonical: currentUrl },
+      openGraph: {
+        title: article.seoTitle,
+        description: article.metaDescription,
+        url: currentUrl,
+        siteName: "NYC Report",
+        type: "article",
+        publishedTime: `${article.date}T00:00:00-05:00`,
+        section: "Politics",
+        tags: article.tags,
+        images: [{ url: imageUrl, width: 880, height: 660, alt: article.alt }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.seoTitle,
+        description: article.metaDescription,
+        images: [{ url: imageUrl, alt: article.alt }],
+        site: "@nycreport_",
+        creator: "@nycreport_",
+      },
+    };
+  }
+
   if (slug === "alina-habba-priorities-100-million-legal-empire-new-husband" && article) {
     const imageUrl = article.image.startsWith("http") ? article.image : `${siteUrl}${article.image}`;
     return {
@@ -2682,6 +2716,26 @@ export default async function DetailPage({ params }: PageProps) {
 
   if (article.articleType === "habba-analysis") {
     return <AlinaHabbaArticle article={article as unknown as AlinaHabbaArticleData} />;
+  }
+
+  /* ── Turhan Mildon / Alina Habba wedding feature (client article) ── */
+  if (slug === "turhan-mildon-alina-habba-wedding-trump-political-circle") {
+    const relatedSlugs = ((article as unknown as { relatedSlugs?: string[] }).relatedSlugs) ?? [];
+    const related: MildonRelated[] = relatedSlugs
+      .map((s) => getArticleBySlug(s))
+      .filter((a): a is Article => Boolean(a))
+      .map((a) => ({
+        slug: a.slug,
+        category: a.category === "puerto rico" ? "puerto-rico" : a.category,
+        title: a.title,
+        image: a.image,
+      }));
+    return (
+      <AlinaturhanmildonArticlePage
+        article={article as unknown as AlinaturhanmildonArticleData}
+        related={related}
+      />
+    );
   }
 
 
