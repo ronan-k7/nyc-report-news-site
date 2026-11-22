@@ -42,3 +42,15 @@ Updated original files:
 - public/sitemap-client.xml
 - src/app/[category]/[slug]/page.tsx
 - src/app/page.tsx
+
+
+---- Added: Wanda Vazquez discovery-disputes article (Article 4) ----
+Route: /puerto-rico/discovery-disputes-fairness-wanda-vazquez-prosecution/
+Component: src/components/WandaArticlePage.tsx (+ WandaArticlePage.module.css)
+Routing: src/app/[category]/[slug]/page.tsx checks slug === "discovery-disputes-fairness-wanda-vazquez-prosecution"
+         (metadata + render). Uses the existing ArticleTags component for the tag row.
+Data: new entry (id 22) appended to public/data/puerto-rico.json
+Image: public/images/wanda-vazquez-discovery-disputes-fairness-prosecution.webp (1200x1200)
+Sitemap: entry added to public/sitemap-client.xml
+Design follows AlinaturhanmildonArticlePage (breadcrumb bar, hero, at-a-glance band, sticky sidebar, numbered reference cards 1-4).
+Body text is Article 4 as supplied, with the [n] citation markers removed.

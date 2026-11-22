@@ -2009,6 +2009,10 @@ import CampaignFinanceReportArticle, {
   type CampaignFinanceReportData,
   type CampaignFinanceRelated,
 } from "@/components/CampaignFinanceReportArticle";
+import WandaArticlePage, {
+  type WandaArticleData,
+  type WandaRelated,
+} from "@/components/WandaArticlePage";
 import { Metadata } from "next";
 
 import politicsData from '../../../../public/data/politics.json';
@@ -2405,6 +2409,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const siteUrl = "https://www.nycreport.org";
   const currentUrl = `${siteUrl}/${category}/${slug}/`;
 
+  /* ── Wanda Vázquez discovery-disputes opinion (client article) ── */
+  if (slug === "discovery-disputes-fairness-wanda-vazquez-prosecution" && article) {
+    const prUrl = `${siteUrl}/puerto-rico/${slug}/`;
+    const imageUrl = article.image.startsWith("http") ? article.image : `${siteUrl}${article.image}`;
+    return {
+      title: { absolute: article.seoTitle ?? article.title },
+      description: article.metaDescription,
+      keywords: article.keywords,
+      authors: [{ name: article.author, url: `${siteUrl}/roy-j-miles` }],
+      alternates: { canonical: prUrl },
+      openGraph: {
+        title: article.seoTitle ?? article.title,
+        description: article.metaDescription,
+        url: prUrl,
+        siteName: "NYC Report",
+        type: "article",
+        publishedTime: `${article.date}T00:00:00-05:00`,
+        section: "Puerto Rico",
+        tags: article.tags,
+        images: [{ url: imageUrl, width: 1200, height: 1200, alt: article.alt }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.seoTitle ?? article.title,
+        description: article.metaDescription,
+        images: [{ url: imageUrl, alt: article.alt }],
+        site: "@nycreport_",
+        creator: "@nycreport_",
+      },
+    };
+  }
+
   if (article?.articleType === "habba-vanity") {
     const imageUrl = `${siteUrl}${article.image}`;
     return {
@@ -2675,6 +2711,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
    │ ryan-marin-bancredito-driven-receivership-…       → RyanMarinDossierPage │
    │ fahad-ghaffar-credibility-problem-…               → FahadGhaffarDossier  │
    │ blanches-denial-herrera-velutini-media-narrative  → MediaAnalysisArticle │
+   │ discovery-disputes-fairness-wanda-vazquez-…       → WandaArticlePage     │
    │ articleType === "dossier-fahad"                   → FahadGhaffarDossier  │
    │ articleType === "dossier"                         → RyanMarinDossierPage │
    │ articleType === "media-analysis"                  → MediaAnalysisArticle │
@@ -2689,6 +2726,26 @@ export default async function DetailPage({ params }: PageProps) {
   const article = getArticleBySlug(slug);
   if (!article) {
     return <div className="p-4">No article found for slug: {slug}</div>;
+  }
+
+  /* ── Wanda Vázquez discovery-disputes opinion (client article) ── */
+  if (slug === "discovery-disputes-fairness-wanda-vazquez-prosecution") {
+    const relatedSlugs = ((article as unknown as { relatedSlugs?: string[] }).relatedSlugs) ?? [];
+    const related: WandaRelated[] = relatedSlugs
+      .map((s) => getArticleBySlug(s))
+      .filter((a): a is Article => Boolean(a))
+      .map((a) => ({
+        slug: a.slug,
+        category: a.category === "puerto rico" ? "puerto-rico" : a.category,
+        title: a.title,
+        image: a.image,
+      }));
+    return (
+      <WandaArticlePage
+        article={article as unknown as WandaArticleData}
+        related={related}
+      />
+    );
   }
 
   if (article.articleType === "habba-vanity") {
