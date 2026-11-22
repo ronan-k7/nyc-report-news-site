@@ -164,7 +164,7 @@ export default function Home() {
     <div className="container py-3 px-3 px-md-4 px-lg-1 mx-auto">
 
 
-      <NewsArticleComponent mainArticle={puertoricoData[19]} />
+      <NewsArticleComponent mainArticle={politicsData[41]} />
 
 
       <div className="row width-first justify-content-center">
@@ -251,13 +251,13 @@ export default function Home() {
       <div className="row width-first">
         <div className="col-lg-8">
           <NewsBus
-            title={politicsData[6].title}
-            shortdescription={politicsData[6].shortdescription ?? ''}
+            title={puertoricoData[19].title}
+            shortdescription={puertoricoData[19].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={politicsData[6].image}
-            category={politicsData[6].category}
-            slug={politicsData[6].slug}
-            author={politicsData[6].author}
+            imageUrl={puertoricoData[19].image}
+            category={puertoricoData[19].category}
+            slug={puertoricoData[19].slug}
+            author={puertoricoData[19].author}
           />
           <NewsBus
             title={businessData[0].title}
