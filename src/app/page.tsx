@@ -270,13 +270,13 @@ export default function Home() {
           />
           {/* test */}
           <NewsBus
-            title={politicsData[4].title}
-            shortdescription={politicsData[4].shortdescription ?? ''}
+            title={politicsData[42].title}
+            shortdescription={politicsData[42].shortdescription ?? ''}
             isPremium={true}
-            imageUrl={politicsData[4].image}
-            category={politicsData[4].category}
-            slug={politicsData[4].slug}
-            author={politicsData[4].author}
+            imageUrl={politicsData[42].image}
+            category={politicsData[42].category}
+            slug={politicsData[42].slug}
+            author={politicsData[42].author}
           />
         </div>
         <div className="col-lg-4">
